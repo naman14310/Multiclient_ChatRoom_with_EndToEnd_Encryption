@@ -18,7 +18,7 @@ rollno = ""
 BLOCK_SIZE = 32
 p=1000000007
 g=2
-
+servers = [8000, 8001]
 #----------------------------------------------------------------------------------------------------------------#
 
 def generate_public_key(roll):
@@ -256,9 +256,23 @@ def init_server(IP, PORT):
 
 #----------------------------------------------------------------------------------------------------------------#
 
+def fetch_server_info():
+    ClientSocket = socket.socket()
+    ClientSocket.connect(("127.0.0.1", 6423))
+    ClientSocket.send(str.encode("Please give me server port"))
+    global port
+    port = int(ClientSocket.recv(1024).decode('utf-8')) 
+    ClientSocket.close()
+
+#----------------------------------------------------------------------------------------------------------------#
+
 def main():
     print()
-    print("---------------------> WELCOME TO MESSENGER <---------------------")
+    print("----------------------> WELCOME TO MESSENGER <---------------------")
+    if(port==8000):
+        print("Connected with Server 1\n")
+    else:
+        print("Connected with Server 2\n")
     print()
     print()
     ClientSocket = socket.socket()
@@ -284,4 +298,5 @@ def main():
         print()
     ClientSocket.close()
 
+fetch_server_info()
 main()
