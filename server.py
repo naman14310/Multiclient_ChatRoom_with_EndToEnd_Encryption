@@ -4,11 +4,12 @@ import sys
 from _thread import *
 
 IP = '127.0.0.1'
-PORT = 2828
+PORT = 2222
 
 userData = {}
 UIPort = {}
 groups = {}
+uroll = {}
 
 #----------------------------------------------------------------------------------------------------------------#
 
@@ -33,9 +34,20 @@ def isUserExist(userID , password):
 
 #----------------------------------------------------------------------------------------------------------------#
 
-def create_user(userID, password, iport):
+def isRollExist(roll):
+    for r in uroll:
+        if uroll[r]==roll:
+            return True
+    return False
+
+#----------------------------------------------------------------------------------------------------------------#
+
+def create_user(userID, password, roll, iport):
     if isUserExist(userID, password) == False:
         userData[userID] = password
+        if isRollExist(roll):
+            return "This rollno already exist."
+        uroll[userID] = roll
         return "User created successfully."
     else:
         return "User already existed"
@@ -95,21 +107,26 @@ def list_groups():
 # Assumption :--> g1,g2,g2
 
 def getIPs(tokens):
-    name = tokens[1];
+    names = tokens[1].split(",");
+    print("---------------------------")
+    print(names)
+    print("---------------------------")
     ips = "IP||"
+    for name in names:
+        
+        if name in UIPort:
+            ips += UIPort[name]+ "||"
+        
+        elif name in groups.keys():
 
-    if name in UIPort:
-        return "IP||" + UIPort[name] + "||"
-    
-    name = name.split(",")
-
-    for gp in name:
-        if gp in groups:
-            for users in groups[gp]:
+            for users in groups[name]:
                 uip = UIPort[users]
                 ips += uip + "||"
         else:
             return "Invalid User name or Group name."
+        print(ips)
+
+    print("--------------------------------")
     return ips
 
 #----------------------------------------------------------------------------------------------------------------#
@@ -123,11 +140,12 @@ def process_request(msg):
     cmd = tokens[0]
 
     if(cmd=="CREATE_USER"):
-        if len(tokens)!=3:
+        if len(tokens)!=4:
             return "Invalid Number of arguments."
         userId = tokens[1]
         pwd = tokens[2]
-        res = create_user(userId, pwd, iport)
+        roll = tokens[3]
+        res = create_user(userId, pwd, roll, iport)
         return res
 
     if(cmd=="LOGIN"):
