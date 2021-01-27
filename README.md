@@ -13,7 +13,9 @@ A multiclient chat application in which message can be sent to an individual or 
 ## How to run ?
 
 `python server.py <PORT>`
+
 `python load_balancer.py`
+
 `python client.py <IP:PORT>`
 
 ## Assumptions 
