@@ -28,7 +28,7 @@ A multiclient chat application in which message can be sent to an individual or 
 
 4. We assumed that unique Roll no. and usernames will be provided.
 
-5. In CREATE_USER command, inputs should be given in this format : CREATE_USER <username> <password> <rollno>
+5. In CREATE_USER command, inputs should be given in this format : `CREATE_USER <username> <password> <rollno>`
   
 6. For sending normal messages, use this command : SEND <username(s) or group(s)> <message>
   
