@@ -30,8 +30,8 @@ A multiclient chat application in which message can be sent to an individual or 
 
 5. In CREATE_USER command, inputs should be given in this format : `CREATE_USER <username> <password> <rollno>`
   
-6. For sending normal messages, use this command : SEND <username(s) or group(s)> <message>
+6. For sending normal messages, use this command : `SEND <username(s) or group(s)> <message>`
   
-7. For sending files, use this command : SEND <username(s) or group(s)> FILE <filepath>
+7. For sending files, use this command : `SEND <username(s) or group(s)> FILE <filepath>`
   
 8. Shared files will be saved in the current working directory with name `username_filename`.
