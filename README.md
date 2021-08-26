@@ -1,4 +1,4 @@
-# Lab Assignment 1 : An end to end messaging system
+# An end to end encrypted messaging system
 
 A multiclient chat application in which message can be sent to an individual or a group with end to end encryption. 
 
